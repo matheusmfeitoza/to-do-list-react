@@ -31,12 +31,17 @@ const App = () => {
   }
 
   const handleTaskAddition = (taskTitle) => {
+    if(taskTitle !== ''){
     const newTask = [...tasks,{
       title: taskTitle,
       id:uuidv4(),
       status: false
     }]
     setTasks(newTask)
+  } else {
+    console.log(tasks)
+    return setTasks(tasks)
+  }
   }
 
   const handleTaskDeletion = (taskId) =>{
