@@ -13,12 +13,12 @@ const Task = ({ task, handleTaskCompleted, handleTaskDeletion }) => {
   return (
     <div
       className="task-container"
-      style={task.status ? { borderLeft: "6px solid chartreuse" } : {}}
+      style={task.completed ? { borderLeft: "6px solid chartreuse" } : {}}
     >
       <div className="task-title" onClick={() => handleTaskCompleted(task.id)}>
         {task.title}
       </div>
-      <div>
+      <div className="button-container">
         <button className="task-button-info" onClick={handleTaskDetailClick}>
           <CgInfo />
         </button>
