@@ -15,3 +15,4 @@ Ainda estou finalizando o mesmo, mas até agora a minha ToDoList é capaz de:
 - Navegação entre tarefas e detalhes das mesmas
 
 - Uso de API para obter tarefas e AXIOS para fazer a conexão da API (GET METHOD)
+    (API usada: https://jsonplaceholder.cypress.io/todos?_limit=10)
