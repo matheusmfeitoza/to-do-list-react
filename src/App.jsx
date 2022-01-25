@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import "./App.css";
+import { v4 as uuidv4 } from "uuid";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+import Header from "./components/Header";
 import AddTask from "./components/AddTask";
 import Tasks from "./components/Tasks";
-import {v4 as uuidv4} from 'uuid'
-import Task from "./components/Task";
+import TaskDetails from "./components/TaskDetails";
+
+import "./App.css";
 
 const App = () => {
   const [tasks, setTasks] = useState([
@@ -19,44 +23,59 @@ const App = () => {
     },
   ]);
 
-  const handleTaskCompleted = (taskId) =>{
-
+  const handleTaskCompleted = (taskId) => {
     const newStatus = tasks.map((task) => {
-      if(task.id === taskId) return {...task, status:!task.status}
+      if (task.id === taskId) return { ...task, status: !task.status };
 
       return task;
-    })
-    setTasks(newStatus)
-
-  }
+    });
+    setTasks(newStatus);
+  };
 
   const handleTaskAddition = (taskTitle) => {
-    if(taskTitle !== ''){
-    const newTask = [...tasks,{
-      title: taskTitle,
-      id:uuidv4(),
-      status: false
-    }]
-    setTasks(newTask)
-  } else {
-    console.log(tasks)
-    return setTasks(tasks)
-  }
-  }
+    if (taskTitle !== "") {
+      const newTask = [
+        ...tasks,
+        {
+          title: taskTitle,
+          id: uuidv4(),
+          status: false,
+        },
+      ];
+      setTasks(newTask);
+    } else {
+      return setTasks(tasks);
+    }
+  };
 
-  const handleTaskDeletion = (taskId) =>{
-    const deleteTask = tasks.filter(task => task.id !== taskId)
-    setTasks(deleteTask)
-  }
+  const handleTaskDeletion = (taskId) => {
+    const deleteTask = tasks.filter((task) => task.id !== taskId);
+    setTasks(deleteTask);
+  };
 
   return (
-    <>
+    <Router>
       <div className="container">
-        <AddTask  handleTaskAddition={handleTaskAddition}/>
-      <Tasks tasks={tasks} handleTaskCompleted={handleTaskCompleted} handleTaskDeletion={handleTaskDeletion} />
+        <Header />
+        <Routes>
+          <Route
+            path="/"
+            exact
+            element={
+              <>
+                <AddTask handleTaskAddition={handleTaskAddition} />
+                <Tasks
+                  tasks={tasks}
+                  handleTaskCompleted={handleTaskCompleted}
+                  handleTaskDeletion={handleTaskDeletion}
+                />
+              </>
+            }
+          />
+          <Route path="/:taskTitle" exact element={<TaskDetails />} />
+        </Routes>
       </div>
-      
-    </>
+    </Router>
   );
 };
 

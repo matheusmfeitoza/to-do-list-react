@@ -1,0 +1,17 @@
+.taskDetails-content {
+  background-color: #444;
+  padding: 10px 20px;
+  margin: 10px 0;
+  color: #eee;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+}
+.taskDetails-content h2 {
+  margin-bottom: 5px;
+  color: chartreuse;
+}
+.taskDetails-Button {
+  width: 30%;
+  margin-top: 10px;
+}
